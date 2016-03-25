@@ -29,7 +29,7 @@ defmodule Chat.RoomController do
   end
 
   def show(conn, %{"id" => id}) do
-    room = Repo.get!(Room, id)
+    room = Room |> Repo.get!(id) |> Repo.preload([:messages])
     render(conn, "show.html", room: room)
   end
 

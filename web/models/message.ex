@@ -1,14 +1,15 @@
-defmodule Chat.Room do
+defmodule Chat.Message do
   use Chat.Web, :model
 
-  schema "rooms" do
-    field :name, :string
-    has_many :messages, Chat.Message
+  schema "messages" do
+    field :content, :string
+    field :user, :string
+    belongs_to :room, Chat.Room
 
     timestamps
   end
 
-  @required_fields ~w(name)
+  @required_fields ~w(content user room_id)
   @optional_fields ~w()
 
   @doc """
