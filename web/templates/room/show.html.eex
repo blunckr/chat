@@ -8,6 +8,6 @@
 
 <input id="user-name" placeholder="Name"></input>
 <input id="new-message" placeholder="Message"></input>
-
+</br>
 <%= link "Edit", to: room_path(@conn, :edit, @room) %>
 <%= link "Back", to: room_path(@conn, :index) %>

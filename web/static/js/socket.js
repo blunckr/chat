@@ -69,6 +69,14 @@ if (chatroom) {
       message.value = '';
     }
   };
+
+  channel.on("new_msg", payload => {
+    var {user, content} = payload;
+    var li = document.createElement('LI');
+    var text = document.createTextNode(`${user} - ${content}`);
+    li.appendChild(text);
+    chatroom.appendChild(li);
+  });
 }
 
 export default socket

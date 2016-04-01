@@ -10,7 +10,9 @@ defmodule Chat.RoomChannel do
   def handle_in("new_msg", %{"body" => body, "username" => user}, socket) do
     [_, room_id] = socket.topic |> String.split(":")
     changeset = Message.changeset(%Message{}, %{content: body, user: user, room_id: room_id})
-    Chat.Repo.insert(changeset)
+    {_, message} = Chat.Repo.insert(changeset)
+    broadcast! socket, "new_msg", %{content: message.content, user: message.user}
     {:noreply, socket}
   end
+
 end
